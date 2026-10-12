@@ -216,3 +216,38 @@ https://ferid-saad.github.io/cv-ferid-saad/
 ## 8. DevSecOps Skills
 
 ![DevSecOps-skills](images/DevSecOps-skills.png)
+
+## 9. Section Projects générée dynamiquement en JavaScript
+
+### capture
+
+![DevSecOps-skills](images/projets.png)
+
+### code JavaScript 
+
+````
+// ===== Projets =====
+const projects = [
+  { title: "Robot suiveur de ligne", description: "Robot pour l'atelier de robotique.", tags: ["Arduino", "C++"] },
+  { title: "Serveur Windows", description: "Domaine Active Directory pour la formation.", tags: ["Windows Server"] },
+  { title: "Gestion de notes", description: "Application web avec SQL Server.", tags: ["SQL Server", "JavaScript"] }
+];
+
+document.getElementById("projects-list").innerHTML = projects.map(p => `
+  <article class="card">
+    <h3>${p.title}</h3>
+    <p>${p.description}</p>
+    <div class="tags">
+      ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+    </div>
+  </article>
+`).join("");
+````
+### portfolio version finale
+
+![DevSecOps-skills](images/portfolio-finale.png)
+
+# III. Dockerisation initiale
+
+## 10. Création d'un Dockerfile pour servir DevSecOps Portfolio avec Nginx
+

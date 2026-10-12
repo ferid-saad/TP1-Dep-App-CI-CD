@@ -4,6 +4,8 @@ document.getElementById("years").textContent = new Date().getFullYear() - START_
 const root = document.documentElement;
 const themeBtn = document.getElementById("theme");
 
+
+
 function applyTheme(theme) {
   root.dataset.theme = theme;
   const dark = theme === "dark";
@@ -19,3 +21,20 @@ themeBtn.addEventListener("click", () => {
 });
 
 document.getElementById("print").addEventListener("click", () => window.print());
+
+// ===== Projets =====
+const projects = [
+  { title: "Robot suiveur de ligne", description: "Robot pour l'atelier de robotique.", tags: ["Arduino", "C++"] },
+  { title: "Serveur Windows", description: "Domaine Active Directory pour la formation.", tags: ["Windows Server"] },
+  { title: "Gestion de notes", description: "Application web avec SQL Server.", tags: ["SQL Server", "JavaScript"] }
+];
+
+document.getElementById("projects-list").innerHTML = projects.map(p => `
+  <article class="card">
+    <h3>${p.title}</h3>
+    <p>${p.description}</p>
+    <div class="tags">
+      ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+    </div>
+  </article>
+`).join("");
