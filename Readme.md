@@ -291,3 +291,13 @@ HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
   CMD wget -qO- http://localhost:8080/ || exit 1
 
   ````
+
+  ### 11. Construction d'une image Docker
+
+  ````
+  sudo apt update
+sudo apt install -y docker.io git
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+
+  ````
