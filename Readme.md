@@ -1,5 +1,5 @@
-# Accès SSH à la VM Ubuntu
-
+# Activité 1
+# I. Mise en place initiale
 ## 1. Environnement
 - Machine physique : Windows 11, client SSH OpenSSH
 - VM : Ubuntu 26.04 LTS sous VirtualBox
@@ -17,7 +17,7 @@ ip a                        # pour relever l'adresse IP
 
 ![Statut du service ssh](images/sshd.png)
 
-## 3. Test depuis la machine physique
+### Test depuis la machine physique
 ```powershell
 ssh ferid@192.168.100.88
 ```
@@ -31,7 +31,7 @@ enregistrée dans `C:\Users\fersd\.ssh\known_hosts`.
 ![Connexion SSH réussie](images/ssh2.png)
 
 
-## 4. Authentification par clé (facultatif)
+### Authentification par clé 
 ```powershell
 ssh-keygen -t ed25519
 scp $env:USERPROFILE\.ssh\id_ed25519.pub ferid@192.168.100.88:/tmp/key.pub
@@ -45,12 +45,12 @@ Dans la VM : ajout de la clé dans `~/.ssh/authorized_keys`
 | Clé publique (client) | copiée dans `/home/ferid/.ssh/authorized_keys` (VM) |
 | Clés du serveur | `/etc/ssh/ssh_host_*` (VM) |
 
-## 5. Installation de Docker sur la VM
+## 3. Installation de Docker sur la VM
 
 Méthode officielle : dépôt APT de Docker (Ubuntu 26.04 « resolute » est supporté).
 Les commandes sont exécutées dans la VM (directement ou via SSH).
 
-### 1. Supprimer les paquets susceptibles d'entrer en conflit
+### 3.1. Supprimer les paquets susceptibles d'entrer en conflit
 
 ```bash
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
@@ -58,7 +58,7 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 done
 ```
 
-### 2. Ajouter le dépôt officiel Docker
+### 3.2. Ajouter le dépôt officiel Docker
 
 ```bash
 sudo apt update
@@ -79,13 +79,13 @@ EOF
 sudo apt update
 ```
 
-### 3. Installer Docker Engine
+### 3.3. Installer Docker Engine
 
 ```bash
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-### 4. Vérifier l'installation
+### 3.4. Vérifier l'installation
 
 ```bash
 sudo systemctl status docker     # doit afficher "active (running)"
@@ -106,12 +106,12 @@ docker --version
 ![Version Docker](images/docker-version.png)
 
 
-## 6. Installation de Jenkins en tant que service
+## 4. Installation de Jenkins en tant que service
 
 Méthode officielle : dépôt APT de Jenkins (version LTS) avec OpenJDK 21.
 Les commandes sont exécutées dans la VM (via SSH).
 
-### 1. Installer Java 21
+### 4.1. Installer Java 21
 
 ```bash
 sudo apt update
@@ -119,7 +119,7 @@ sudo apt install -y fontconfig openjdk-21-jre
 java -version
 ```
 
-### 2. Ajouter le dépôt officiel Jenkins
+### 4.2. Ajouter le dépôt officiel Jenkins
 
 ```bash
 sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
@@ -131,13 +131,13 @@ echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.
 sudo apt update
 ```
 
-### 3. Installer Jenkins
+### 4.3. Installer Jenkins
 
 ```bash
 sudo apt install -y jenkins
 ```
 
-### 4. Activer et démarrer le service
+### 4.4. Activer et démarrer le service
 
 ```bash
 sudo systemctl enable --now jenkins
@@ -148,20 +148,20 @@ sudo systemctl status jenkins     # doit afficher "active (running)"
 ![Jenkins Running](images/jenkins-running.png)
 Le service démarre automatiquement au boot (`enable`) et écoute sur le port 8080.
 
-### 5. Ouvrir le port 8080 (si le pare-feu UFW est actif)
+### 4.5. Ouvrir le port 8080 (si le pare-feu UFW est actif)
 
 ```bash
 sudo ufw status
 sudo ufw allow 8080/tcp
 ```
 
-### 6. Récupérer le mot de passe initial
+### 4.6. Récupérer le mot de passe initial
 
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 
-### 7. Vérification depuis la machine physique
+### 4.7. Vérification depuis la machine physique
 
 Dans PowerShell sous Windows :
 
@@ -185,7 +185,7 @@ affichant l'interface Jenkins.*
 
 
 
-## 7. mini CV One Page 
+## 5. mini CV One Page 
 
 https://github.com/ferid-saad/cv-ferid-saad
 
@@ -194,7 +194,7 @@ https://ferid-saad.github.io/cv-ferid-saad/
 ![ CV-Ferid SAAD](images/cv-ferid-saad1.png)
 
 
-## 8. Configuration du push GitHub via SSH
+## 6. Configuration du push GitHub via SSH
 
 1. Génération de la clé : `ssh-keygen -t ed25519 -C "fersd2018@gmail.com"`
 2. Ajout de la clé publique dans GitHub (Settings → SSH and GPG keys → New SSH key)
@@ -205,3 +205,10 @@ https://ferid-saad.github.io/cv-ferid-saad/
 
 
 ![Test SSH GitHub](images/test-connexion-ssh.png)
+
+
+# II. Évolution du mini-CV vers DevSecOps Portfolio
+
+## 7.DevSecOps Portfolio 
+
+![DevSecOps-skills](images/DevSecOps-skills.png)
