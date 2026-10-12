@@ -10,15 +10,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+ 
   <main class="cv">
+     
     <aside class="side">
+<nav class="nav no-print">
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#Experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+      </nav>
+
       <img class="avatar" src="images/photo.png" alt="Photo de Ferid Saad" width="88" height="88">
       <h1>Ferid Saad</h1>
       <p class="role">Professeur d'éducation technique</p>
       <p class="years"><strong id="years">24</strong> ans d'enseignement</p>
 
-      <section>
-        <h2>Informations personnelles</h2>
+      <section id="about">
+        <h2>About</h2>
         <ul class="plain">
           <li>Saad Ferid</li>
           <li>Né le 23-06-1976</li>
@@ -60,8 +71,9 @@
     </aside>
 
     <div class="content">
-      <section>
-        <h2>Parcours professionnel</h2>
+      <section id="Experience">
+          
+       <h2>Experience</h2>
         <ol class="timeline">
           <li><time>2012 - 2026</time><div><h3>Professeur d'éducation technique</h3><p>Collège Ibn El Chabat, Tozeur</p></div></li>
           <li><time>2008 - 2012</time><div><h3>Professeur d'éducation technique</h3><p>Collège Zawiet El Arab, Tozeur</p></div></li>
@@ -81,17 +93,18 @@
         </ol>
       </section>
 
-      <section>
-        <h2>DevSecOps Skills</h2>
-        <ul class="grid skills">
-          <li class="card"><h3>Git</h3><p>Versionnement, GitHub, SSH</p></li>
-          <li class="card"><h3>Docker</h3><p>Images, conteneurs, Compose</p></li>
-          <li class="card"><h3>Jenkins</h3><p>Intégration continue</p></li>
-          <li class="card"><h3>Kubernetes</h3><p>Pods, déploiements, kubectl</p></li>
-          <li class="card"><h3>Ansible</h3><p>Configuration automatisée</p></li>
-          <li class="card"><h3>Terraform</h3><p>Infrastructure as Code</p></li>
-          <li class="card"><h3>Argo CD</h3><p>Déploiement GitOps</p></li>
-        </ul>
+<section id="skills">
+          <h2>Skills</h2>
+        <ol class="timeline">
+          <li><time>Git</time><div><h3>Versionnement, GitHub, SSH</p></div></li>
+          <li><time>Docker</time><div><h3>Images, conteneurs, Compose</h3></div></li>
+          <li><time>Jenkins</time><div><h3>Intégration continue</h3></div></li>
+          <li><time>Kubernetes</time><div><h3>Pods, déploiements, kubectl</h3></div></li>
+          <li><time>Ansible</time><div><h3>Configuration automatisée</h3></div></li>
+          <li><time>Terraform</time><div><h3>Infrastructure as Code</h3></div></li>
+          <li><time>Argo CD</time><div><h3>Déploiement GitOps</h3></div></li>
+        </ol>
+
       </section>
 
       <section>

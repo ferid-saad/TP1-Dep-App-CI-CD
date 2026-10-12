@@ -211,4 +211,8 @@ https://ferid-saad.github.io/cv-ferid-saad/
 
 ## 7.DevSecOps Portfolio 
 
+![DevSecOps-skills](images/portfolio.png)
+
+## 8. DevSecOps Skills
+
 ![DevSecOps-skills](images/DevSecOps-skills.png)

@@ -28,10 +28,10 @@ body {
 }
 h1, h2, h3 { font-family: "Space Grotesk", system-ui, sans-serif; margin: 0; }
 .cv {
-  max-width: 920px;
+  max-width: 980px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 290px 1fr;
+  grid-template-columns: 320px 1fr;
   background: var(--paper);
   border-radius: 12px;
   overflow: hidden;
