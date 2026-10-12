@@ -1,0 +1,14 @@
+# Image officielle sans privilèges root (écoute sur le port 8080)
+FROM nginxinc/nginx-unprivileged:1.27-alpine
+
+# Configuration personnalisée
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Fichiers du site (uniquement ceux nécessaires)
+COPY index.html style.css script.js /usr/share/nginx/html/
+COPY images/ /usr/share/nginx/html/images/
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+  CMD wget -qO- http://localhost:8080/ || exit 1

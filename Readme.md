@@ -251,3 +251,43 @@ document.getElementById("projects-list").innerHTML = projects.map(p => `
 
 ## 10. Création d'un Dockerfile pour servir DevSecOps Portfolio avec Nginx
 
+### Dockerfile avec commentaires
+
+````
+# FROM : image de départ sur laquelle on construit la nôtre
+# - nginxinc/nginx-unprivileged : version officielle de Nginx qui ne tourne PAS en root
+#   (si un attaquant compromet le serveur, il a très peu de droits)
+# - 1.27-alpine : version fixée de Nginx (builds reproductibles, contrairement à "latest")
+#   et base Alpine Linux, une distribution minuscule (moins de composants = moins de failles)
+FROM nginxinc/nginx-unprivileged:1.27-alpine
+
+# COPY : copie un fichier de votre ordinateur vers l'image
+# Ici, votre nginx.conf remplace la configuration par défaut de Nginx
+# (c'est le fichier avec le port 8080, les en-têtes de sécurité, le cache...)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copie uniquement les 3 fichiers principaux du site dans le dossier servi par Nginx
+# (le "/" final indique que la destination est un dossier)
+# On évite "COPY . ." pour ne pas embarquer par erreur des fichiers inutiles ou sensibles
+COPY index.html style.css script.js /usr/share/nginx/html/
+
+# Copie le dossier images/ (photo de profil, etc.) vers le sous-dossier correspondant
+# Il faut une ligne séparée : copier un dossier avec d'autres fichiers mélangerait leur contenu
+COPY images/ /usr/share/nginx/html/images/
+
+# EXPOSE : documente le port sur lequel le conteneur écoute (8080, comme dans nginx.conf)
+# C'est une information : cela n'ouvre pas le port, c'est "-p 8080:8080" au lancement qui le fait
+EXPOSE 8080
+
+# HEALTHCHECK : Docker teste régulièrement que le site répond bien
+#   --interval=30s : un test toutes les 30 secondes
+#   --timeout=3s   : le test échoue s'il dure plus de 3 secondes
+#   --retries=3    : après 3 échecs de suite, le conteneur est marqué "unhealthy"
+# La commande testée :
+#   wget -qO- http://localhost:8080/ : télécharge la page d'accueil en silence (-q)
+#                                      et l'affiche sur la sortie (-O-) sans créer de fichier
+#   || exit 1                        : si wget échoue, on signale l'échec à Docker
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+  CMD wget -qO- http://localhost:8080/ || exit 1
+
+  ````
