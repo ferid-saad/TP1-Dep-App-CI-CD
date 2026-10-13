@@ -294,10 +294,60 @@ HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
 
   ### 11. Construction d'une image Docker
 
+  #### 11.1 Connexion SSH : 
+````
+  Redirection de ports :
+
+Nom	Protocole	IP hôte	Port hôte	IP invité	Port invité
+cv	TCP	127.0.0.1	8081	(vide)	8081
+````
+  ````
+  Test-NetConnection 127.0.0.1 -Port 2222
+ssh -p 2222 ferid@127.0.0.1
+````
+#### 11.2 Préparation de la VM Ubuntu: 
   ````
   sudo apt update
-sudo apt install -y docker.io git
-sudo systemctl enable --now docker
-sudo usermod -aG docker $USER
-
+  docker --version
   ````
+![Docker-version](images/docker-version.png)
+
+#### 11.3 Récupération du projet
+
+````
+git clone https://github.com/ferid-saad/TP1-Dep-App-CI-CD.git
+cd TP1-Dep-App-CI-CD/cv-ferid-saad
+git pull
+````
+#### 11.4 Construire l’image
+
+````
+sudo docker build -t cv-docker .
+````
+#### 11.5 Lancer le conteneur
+
+````
+sudo docker run -d --name cv -p 8081:8080 cv-docker
+````
+-d : en arrière-plan
+--name cv : nom du conteneur
+-p 8081:8080 : port 8081 de la VM vers le port 8080 du conteneur (8080 était déjà pris par Jenkins)
+
+#### 11.6 Tester
+
+````
+sudo docker ps                  # le conteneur doit être "Up" puis "healthy"
+sleep 5
+curl -I http://localhost:8081   # doit répondre HTTP/1.1 200 OK, Server: nginx
+
+  
+````
+## 12. Exécutiton du conteneur depuis la machine physique
+
+http://192.168.100.88:8081
+ou 
+http://localhost:8081 
+
+### Capture
+
+![Portfolio-dockerisé](images/portfolio-docker.png)
