@@ -351,3 +351,33 @@ http://localhost:8081
 ### Capture
 
 ![Portfolio-dockerisé](images/portfolio-docker.png)
+
+## 13. Déployez le Portfolio avec Docker Compose
+
+````
+services:
+  cv:
+    build: .
+    image: cv-docker
+    container_name: cv
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+      ````
+````
+sudo docker compose up -d --build
+sudo docker compose ps
+sleep 5
+curl -I http://localhost:8081
+
+
+### Capture
+
+![docker-compose](images/docker-compose.png)
