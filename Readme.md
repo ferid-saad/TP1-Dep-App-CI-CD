@@ -381,3 +381,84 @@ curl -I http://localhost:8081
 ### Capture
 
 ![docker-compose](images/docker-compose.png)
+
+## 14. Github via SSH
+
+### Publication sur GitHub via SSH
+
+#### Commandes Git utilisées
+
+```bash
+ssh-keygen -t ed25519 -C "fersd2018@gmail.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+ssh -T git@github.com
+git remote set-url origin git@github.com:ferid-saad/TP1-Dep-App-CI-CD.git
+git status
+git add .
+git commit -m "Portfolio avec Docker Compose"
+git push origin main
+```
+
+### Lien du dépôt GitHub
+```
+https://github.com/ferid-saad/TP1-Dep-App-CI-CD.git
+
+```
+
+# IV. Première introduction à l'automatisation
+
+## 15. Installation de Vagrant
+
+Avant de commencer : Vagrant a besoin d’un hyperviseur
+
+Vagrant ne crée pas de VM lui-même, il pilote VirtualBox. Votre VM est déjà dans VirtualBox, il faut donc installer VirtualBox dans la VM : c’est la virtualisation imbriquée (nested).
+
+### 15.1 Vérification des ressources
+````
+free -h     # RAM : prévoir au moins 4 Go pour la VM, dont 1 à 2 Go pour la VM Vagrant
+df -h /     # disque : prévoir au moins 15 à 20 Go libres
+nproc       # nombre de CPU : au moins 2
+````
+#### Capture
+
+![Verification des ressources](images/ressources.png)
+
+### 15.2 Activer la virtualisation imbriquée
+
+````
+cd "C:\Program Files\Oracle\VirtualBox"
+.\VBoxManage.exe modifyvm "Ubuntu-26.04-LTS" --nested-hw-virt on
+
+````
+### 15.3 Installation du Vagrant et création du premier Vagrantfile
+
+#### Installation de VirtualBox et Vagrant
+
+````
+sudo apt update
+sudo apt install -y virtualbox
+
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update
+sudo apt install -y vagrant
+
+vagrant --version
+````
+##### Capture
+
+![Version de Vagrant](images/vagrant-version.png)
+
+### 15.4 Création de Vagrantfile
+
+````
+mkdir -p ~/vagrant-ubuntu && cd ~/vagrant-ubuntu
+nano Vagrantfile
+````
+Contenu :
+````
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+end
+````
