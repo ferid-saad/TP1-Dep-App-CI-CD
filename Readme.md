@@ -342,7 +342,7 @@ curl -I http://localhost:8081   # doit répondre HTTP/1.1 200 OK, Server: nginx
 
   
 ````
-## 12. Exécutiton du conteneur depuis la machine physique
+## 12. Exécution du conteneur depuis la machine physique
 
 http://192.168.100.88:8081
 ou 
