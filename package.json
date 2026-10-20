@@ -1,0 +1,26 @@
+{
+  "name": "portfolio-ferid-saad-nextjs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio & CV DevSecOps de Ferid Saad réalisé avec Next.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "lucide-react": "^0.468.0",
+    "canvas-confetti": "^1.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "@types/canvas-confetti": "^1.9.0",
+    "typescript": "^5.7.2"
+  }
+}
